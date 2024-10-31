@@ -3,7 +3,7 @@ import { IPagesAppMutation } from '../../types';
 
 interface Props {
   addNewPage: (newPage: IPagesAppMutation) => void;
-  EditPage?:IPagesAppMutation;
+  editPage?:IPagesAppMutation;
   isEditing?:boolean;
 }
 
@@ -12,10 +12,10 @@ const initionState = {
   Content: '',
 };
 
-const PagesForm: React.FC<Props> = ({addNewPage, EditPage= initionState , isEditing=false}) => {
-  const [newPage,setNewPage] = useState<IPagesAppMutation>(initionState);
+const PagesForm: React.FC<Props> = ({addNewPage, editPage=initionState , isEditing=false}) => {
+  const [newPage,setNewPage] = useState<IPagesAppMutation>(editPage);
 
-  const changePageContent = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const changePageContent = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setNewPage(prevState => {
       return {
         ...prevState,
@@ -32,11 +32,13 @@ const onSubmit = (e: React.FormEvent) => {
     addNewPage({
       title: newPage.title,
       Content: newPage.Content,
+      category: newPage.category,
     });
     if (!isEditing){
       setNewPage({
         title:'',
         Content: '',
+        category:'',
       });
     };
   }
@@ -46,27 +48,44 @@ const onSubmit = (e: React.FormEvent) => {
   return (
     <form onSubmit={onSubmit} className='p-3'>
       <h3>add</h3>
+
+      <div className="form-group mb-2">
+        <label htmlFor='category'>Category
+        <select onChange={changePageContent} name='category' value={newPage.category}>
+          <option value='-' selected disabled>Select the category</option>
+          <option value='war' >War</option>
+          <option value='tree' >tree</option>
+          <option value='bad' >bad</option>
+          <option value='table' >table</option>
+          <option value='motivation' >motivation</option>
+
+        </select>
+
+        </label>
+
+      </div>
+
       <div className="form-group mb-2">
         <label htmlFor='title'>Title:</label>
         <input
-        type="text"
-        onChange={changePageContent}
-        value={newPage.title}
-        id="title"
-        name="title"
-        className="form-control"
+          type="text"
+          onChange={changePageContent}
+          value={newPage.title}
+          id="title"
+          name="title"
+          className="form-control"
         />
       </div>
 
       <div className="form-group mb-2">
         <label htmlFor='Content'>Content:</label>
         <input
-        type="text"
-        onChange={changePageContent}
-        value={newPage.Content}
-        id="Content"
-        name="Content"
-        className="form-control"
+          type="text"
+          onChange={changePageContent}
+          value={newPage.Content}
+          id="Content"
+          name="Content"
+          className="form-control"
         />
       </div>
 

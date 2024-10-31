@@ -6,7 +6,7 @@ import Spinner from '../../components/UI/Spinner/Spinner.tsx';
 import PagesForm from '../../components/PagesForm/PagesForm.tsx';
 
 const EditPage = () => {
-  const [page,setPage] = useState<ApiPage | null>(null);
+  const [page,setPage] = useState<ApiPage>();
   const [loading, setLoading] = useState<boolean>(false);
   const {id}= useParams();
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const EditPage = () => {
   }, [id]);
 
   useEffect(() => {
-    void getOnePAgeId;
+    void getOnePAgeId();
   }, [getOnePAgeId]);
 
   const addNewPage = async (page:ApiPage) => {
@@ -36,7 +36,7 @@ const EditPage = () => {
 
   return (
     <div>
-      {loading ? <Spinner/> : <PagesForm addNewPage={addNewPage} EditPage={page} isEditing={true}/>}
+      {loading ? <Spinner/> : <PagesForm addNewPage={addNewPage} editPage={page} isEditing={true}/>}
     </div>
   );
 };

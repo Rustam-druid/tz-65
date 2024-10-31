@@ -38,7 +38,7 @@ const App = () => {
     setPages(pages);
     void fetchPages();
 
-  }, [fetchPages]);
+  }, [fetchPages , pages]);
 
 
   return (
