@@ -42,7 +42,7 @@ const App = () => {
 
   return (
     <>
-      <div className="container p-0 w-50 border border-3 border-black">
+      <div className="container p-0 w-50 border border-3 border-black bg-secondary-subtle">
         <div style={{backgroundColor: '#ccc', height: 60, borderBottom: '3px solid black'}}></div>
         <header><ToolBar/></header>
         <main>

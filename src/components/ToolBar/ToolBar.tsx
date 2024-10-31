@@ -11,10 +11,10 @@ const ToolBar = () => {
           <div className="ms-auto">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink className="nav-link text-primary"  to="/">Home</NavLink>
+                <NavLink className="nav-link text-dark btn btn-primary "  to="/">Home</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link text-primary" to="/newpage">New Pages</NavLink>
+                <NavLink className="nav-link btn text-dark btn-primary" to="/newpage">New Pages</NavLink>
               </li>
             </ul>
           </div>

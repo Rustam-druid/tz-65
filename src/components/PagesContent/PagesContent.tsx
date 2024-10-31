@@ -11,7 +11,7 @@ const PagesContent: React.FC<Props> = ({ pages , deletePage}) => {
   return (
     <>
       {pages.map((page) => (
-        <PagesItemContent key={page.id} page={page} onDeletePage={() => deletePage(page.id)}   />
+        <PagesItemContent key={page.id} page={page} onDeletePage  ={() => deletePage(page.id)}   />
       ))}
     </>
   );
