@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IPagesAppMutation } from '../../types';
 
 interface Props {
@@ -17,17 +17,15 @@ const PagesForm: React.FC<Props> = ({addNewPage, editPage=initionState , isEditi
   const [newPage,setNewPage] = useState<IPagesAppMutation>(editPage);
 
   const changePageContent = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setNewPage(prevState => {
-      return {
-        ...prevState,
-        [e.target.name]: e.target.value,
-      };
-    });
+    setNewPage(prevState => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
 const onSubmit = (e: React.FormEvent) => {
   e.preventDefault();
-  if (newPage.title.trim().length === 0 || newPage.Content.trim().length === 0) {
+  if (newPage.title.trim().length === 0 || newPage.Content.trim().length === 0 || newPage.category.trim().length === 0) {
     alert('Заполните поля');
   }else {
     addNewPage({
@@ -44,7 +42,9 @@ const onSubmit = (e: React.FormEvent) => {
     };
   }
 };
-
+  useEffect(() => {
+    setNewPage(editPage);
+  }, [editPage]);
 
   return (
     <form onSubmit={onSubmit} className='p-3'>
@@ -54,7 +54,7 @@ const onSubmit = (e: React.FormEvent) => {
         <label htmlFor='category'>Category
         <select onChange={changePageContent} name='category' value={newPage.category}>
           <option value='-'  disabled>Select the category</option>
-          <option value='war' >war</option>
+          <option value='bob' >bob</option>
           <option value='tree' >tree</option>
           <option value='bad' >bad</option>
           <option  value='table' >table</option>

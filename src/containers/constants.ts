@@ -1,6 +1,6 @@
 
 export const categories = [
-{title: 'war' , id: 'war'},
+{title: 'bob' , id: 'bob'},
 {title: 'tree' , id: 'tree'},
 {title: 'bad' , id: 'bad'},
 {title: 'table' , id: 'table'},

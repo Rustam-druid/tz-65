@@ -17,8 +17,7 @@ const App = () => {
       if (responsePages.data === null) {
         setPages([]);
         return;
-      }
-      ;
+      };
 
       const addNewKeyInObj = Object.keys(responsePages.data).map(Newkey => {
         return {

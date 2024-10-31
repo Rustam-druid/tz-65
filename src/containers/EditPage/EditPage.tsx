@@ -6,14 +6,14 @@ import Spinner from '../../components/UI/Spinner/Spinner.tsx';
 import PagesForm from '../../components/PagesForm/PagesForm.tsx';
 
 const EditPage = () => {
-  const [page,setPage] = useState<ApiPage>();
+  const [page, setPage] = useState<ApiPage>();
   const [loading, setLoading] = useState<boolean>(false);
-  const {id}= useParams();
+  const {id} = useParams();
   const navigate = useNavigate();
 
   const getOnePAgeId = useCallback(async () => {
-    const response: {data: ApiPage } = await axiosApi(`pages/${id}.json`);
-    if (response.data){
+    const response: { data: ApiPage } = await axiosApi(`pages/${id}.json`);
+    if (response.data) {
       setPage(response.data);
     }
   }, [id]);
@@ -22,14 +22,14 @@ const EditPage = () => {
     void getOnePAgeId();
   }, [getOnePAgeId]);
 
-  const addNewPage = async (page:ApiPage) => {
-    try{
+  const addNewPage = async (page: ApiPage) => {
+    try {
       setLoading(true);
       await axiosApi.put(`pages/${id}.json`, page);
       navigate('/');
-    }catch(err){
+    } catch (err) {
       console.log(err);
-    }finally {
+    } finally {
       setLoading(false);
     }
   };

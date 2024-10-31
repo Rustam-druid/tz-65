@@ -8,17 +8,18 @@ import { NavLink, useParams } from 'react-router-dom';
 
 interface Props {
   loadingFromApp: boolean;
-  pages:IPagesApp[];
 }
 
 const categoriesList = categories;
 
-const Home: React.FC<Props> = ({loadingFromApp, pages}) => {
+const Home: React.FC<Props> = ({loadingFromApp}) => {
 const {categoryId} = useParams();
+const [loading, setLoading] = useState(false);
 const [page, setPage] = useState<IPagesApp[]>([]);
 
 const fetchData = useCallback(async () => {
   try{
+    setLoading(true);
     const response = await axiosApi(
       !categoryId ? 'pages.json' : `/pages.json?orderBy="category"&equalTo="${categoryId}"`);
 
@@ -40,13 +41,13 @@ const fetchData = useCallback(async () => {
     }
   }catch(error){
     console.log(error);
+  }finally {
+    setLoading(false);
   }
 
 },[categoryId]);
 
-  useEffect(() => {
-void fetchData();
-  }, [fetchData] );
+
 
   const getTitle = (categoryId: string) => {
     const getClickCategory = categoriesList.filter(category => {
@@ -58,26 +59,29 @@ void fetchData();
   const deletePage = useCallback(async (id:string) => {
     try {
        await axiosApi.delete(`pages/${id}.json`);
-
+         await  fetchData();
     }catch (e) {
       console.error(e);
     }
-  }, []);
+  }, [categoryId]);
+
+  useEffect(() => {
+    void fetchData();
+  }, [fetchData, categoryId ] );
 
   return (
     <>
       {loadingFromApp ? <Spinner/> :
         <div className='row justify-content-between m-2'>
 
-          <div>
-            <ul>
-              <li> <NavLink to={`/`}>All</NavLink> </li>
+          <div className='row'>
+            <ul className='col-4 list-unstyled row me-auto'>
+              <li className='btn btn-light'><NavLink to={`/`}>All</NavLink></li>
               {categories.map((category) => (
-                <li key={category.id}> <NavLink to={`/pages/${category.id}`}>{category.title}</NavLink> </li>
-                ))}
+                <li className='btn btn-light' key={category.id}><NavLink to={`/pages/${category.id}`}>{category.title}</NavLink></li>
+              ))}
             </ul>
-
-            <div className='title'>
+            <div className='col-8'>
               <h2>{!categoryId ? 'all' : getTitle(categoryId)}</h2>
               <div>
                 {page.length === 0 ? <p>no pages</p> : <>
@@ -88,7 +92,7 @@ void fetchData();
             </div>
           </div>
 
-      </div>}
+        </div>}
 
 
     </>
