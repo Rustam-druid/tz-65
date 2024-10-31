@@ -3,6 +3,8 @@ import { IPagesAppMutation } from '../../types';
 
 interface Props {
   addNewPage: (newPage: IPagesAppMutation) => void;
+  EditPage?:IPagesAppMutation;
+  isEditing?:boolean;
 }
 
 const initionState = {
@@ -10,7 +12,7 @@ const initionState = {
   Content: '',
 };
 
-const PagesForm: React.FC<Props> = ({addNewPage}) => {
+const PagesForm: React.FC<Props> = ({addNewPage, EditPage= initionState , isEditing=false}) => {
   const [newPage,setNewPage] = useState<IPagesAppMutation>(initionState);
 
   const changePageContent = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -31,8 +33,13 @@ const onSubmit = (e: React.FormEvent) => {
       title: newPage.title,
       Content: newPage.Content,
     });
+    if (!isEditing){
+      setNewPage({
+        title:'',
+        Content: '',
+      });
+    };
   }
-
 };
 
 

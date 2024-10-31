@@ -4,6 +4,7 @@ import axiosAPI from './axiosAPI.ts';
 import ToolBar from './components/ToolBar/ToolBar.tsx';
 import Home from './containers/Home/Home.tsx';
 import NewPage from './containers/NewPage/NewPage.tsx';
+import EditPage from './containers/EditPage/EditPage.tsx';
 
 const App = () => {
   const [pages, setPages] = useState([]);
@@ -49,6 +50,7 @@ const App = () => {
           <div className="row">
             <Routes>
               <Route path='/' element={<Home pages={pages} loadingFromApp={loading} />} />
+              <Route path='/editDish/:id' element={<EditPage />} />
               <Route path='/newpage' element={<NewPage />} />
             </Routes>
           </div>
