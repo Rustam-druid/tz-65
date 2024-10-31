@@ -1,34 +1,23 @@
-import Dishes from '../../components/Dishes/Dishes.tsx';
-import Cart from '../../components/Cart/Cart.tsx';
-import { DishCart, IDish } from '../../types';
-import * as React from 'react';
-import { useCallback } from 'react';
+import React from 'react';
+import { IPagesApp } from '../../types';
 import Spinner from '../../components/UI/Spinner/Spinner.tsx';
-import axiosApi from '../../axiosAPI.ts';
+import PagesContent from '../../components/PagesContent/PagesContent.tsx';
 
-
-interface  Props {
-  dishes: IDish[];
-  isLoadingDishes: boolean;
+interface Props {
+  loadingFromApp: boolean;
+  pages:IPagesApp[];
 }
 
-const Home: React.FC<Props> = ({dishes,isLoadingDishes = false , }) => {
-
-
-
+const Home: React.FC<Props> = ({loadingFromApp, pages}) => {
   return (
     <>
-    {
-      isLoadingDishes ? <Spinner/> :
-        <div className="row justify-content-between">
-          <div className="col col-md-5 mb-2">
-            {dishes.length > 0 ?
-              <Dishes dishes={dishes}  />
-              : <p>Not dishes</p>
-            }
+
+          <div className='row'>
+
+           <PagesContent pages={pages}/>
+
           </div>
-        </div>
-    }
+
     </>
   );
 };
