@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
-import axiosApi from './axiosAPI.ts';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import axiosAPI from './axiosAPI.ts';
 import ToolBar from './components/ToolBar/ToolBar.tsx';
 import Home from './containers/Home/Home.tsx';
+import NewPage from './containers/NewPage/NewPage.tsx';
 
 const App = () => {
   const [pages, setPages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchPages = async () => {
+  const fetchPages = useCallback (async () => {
     try {
-      const responsePages = await axiosApi('pages.json');
+      const responsePages = await axiosAPI('pages.json');
 
       if (responsePages.data === null) {
         setPages([]);
@@ -30,10 +31,12 @@ const App = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
+    setPages(pages);
     void fetchPages();
+
   }, [fetchPages]);
 
 
@@ -45,7 +48,8 @@ const App = () => {
         <main>
           <div className="row">
             <Routes>
-              <Route path='/' element={<Home pages={pages} loading={loading} />} />
+              <Route path='/' element={<Home pages={pages} loadingFromApp={loading} />} />
+              <Route path='/newpage' element={<NewPage />} />
             </Routes>
           </div>
         </main>

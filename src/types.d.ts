@@ -3,3 +3,8 @@ export interface IPagesApp {
   title:string;
   Content:string;
 }
+export interface IPagesAppMutation {
+  title:string;
+  Content:string;
+}
+export type ApiPage = Omit<IPagesAppMutation , 'id'>

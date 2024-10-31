@@ -14,7 +14,7 @@ const ToolBar = () => {
                 <NavLink className="nav-link text-primary"  to="/">Home</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link text-primary" to="/newDish">New Pages</NavLink>
+                <NavLink className="nav-link text-primary" to="/newpage">New Pages</NavLink>
               </li>
             </ul>
           </div>
