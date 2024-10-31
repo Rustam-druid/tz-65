@@ -10,6 +10,7 @@ interface Props {
 const initionState = {
   title:'',
   Content: '',
+  category:'',
 };
 
 const PagesForm: React.FC<Props> = ({addNewPage, editPage=initionState , isEditing=false}) => {
@@ -52,12 +53,12 @@ const onSubmit = (e: React.FormEvent) => {
       <div className="form-group mb-2">
         <label htmlFor='category'>Category
         <select onChange={changePageContent} name='category' value={newPage.category}>
-          <option value='-' selected disabled>Select the category</option>
-          <option value='war' >War</option>
+          <option value='-'  disabled>Select the category</option>
+          <option value='war' >war</option>
           <option value='tree' >tree</option>
           <option value='bad' >bad</option>
-          <option value='table' >table</option>
-          <option value='motivation' >motivation</option>
+          <option  value='table' >table</option>
+          <option  value='motivation' >motivation</option>
 
         </select>
 

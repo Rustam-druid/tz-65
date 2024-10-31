@@ -35,10 +35,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    setPages(pages);
+
     void fetchPages();
 
-  }, [fetchPages , pages]);
+  }, [fetchPages ]);
 
 
   return (
@@ -50,6 +50,7 @@ const App = () => {
           <div className="row">
             <Routes>
               <Route path='/' element={<Home pages={pages} loadingFromApp={loading} />} />
+              <Route path='/pages/:categoryId' element={<Home  pages={pages} loadingFromApp={loading}/>} />
               <Route path='/editDish/:id' element={<EditPage />} />
               <Route path='/newpage' element={<NewPage />} />
             </Routes>
